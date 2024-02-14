@@ -11,5 +11,14 @@ func main() {
 		log.Fatal(err)
 	}
 	defer conn.Close()
-	conn.Write([]byte("TCP Test Client Connection"))
+	data := []byte("Client Data Received")
+
+	for i := 0; i < 10; i++ {
+		_, err := conn.Write(data)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		log.Print("Client Data Sent", i+1)
+	}
 }
